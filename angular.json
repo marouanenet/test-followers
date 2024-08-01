@@ -15,6 +15,7 @@
           "options": {
             "outputPath": "dist/app-angular",
             "index": "src/index.html",
+            "baseHref": "/test-followers/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
@@ -84,7 +85,7 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css"              
             ],
             "scripts": []
           }

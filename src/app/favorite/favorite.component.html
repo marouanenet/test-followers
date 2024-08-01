@@ -1,0 +1,11 @@
+<!--ngClass  replace class.bi-bookmark-star-fill and class.bi-bookmark-star to avoid repetition-->
+<span (click)="toggleFavorite()" class="bi" 
+    [ngClass]="{ 
+        'bi-bookmark-star-fill':isFavorite,
+        'bi-bookmark-star':!isFavorite
+    }"
+    [ngStyle]="{
+        'color':isFavorite?'red':'blue',
+        'font-size':isFavorite ? '40px':'20px'
+    }">
+</span>

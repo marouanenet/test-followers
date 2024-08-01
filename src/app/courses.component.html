@@ -1,0 +1,66 @@
+<div *ngIf="courses.length>0; then listCourses else noCourses"></div>
+
+<ng-template #listCourses>
+    <h1 [style.backgroundColor]="isButtonActive ? 'green' : 'grey'">{{getTitle()}}</h1>
+
+    <ul>
+        <li *ngFor="let course of courses; index as i"> <!-- index return the index of the array / even boolean return if the index is even or not/ first : return the first element/last return the last element-->
+           {{i}} {{course.id}} {{course.title}}
+           <button class="btn btn-danger" (click)="deleteCourse(course)">Delete</button>
+           <button class="btn btn-warning" (click)="editCourse(course)">Edit</button>
+        </li>
+    </ul>
+</ng-template>
+
+<button class="btn btn-success" (click)="addCourse()">Add Course</button>
+
+<ng-template #noCourses>
+    <p>No courses available.</p>
+</ng-template>
+
+
+<!--hidden vs *ngIf : hidden le composant se charge en done juste il est caché, ngIf le composant n'est pas chargé dans le dom-->
+<div [hidden]="courses.length==0">
+    Liste des cours
+</div>
+<div [hidden]="courses.length>0">
+    Pas de cours
+</div>
+
+<div (click)="onClickDiv()">
+    <button (click)="doAction($event)" class="btn btn-primary" [class.active]="isButtonActive">button</button>
+</div>
+
+<input #email type="text" (keyup.enter)="onKeyup(email)" /> <!-- execute action when enter is pressed -->
+
+
+
+
+
+<div class="container">
+    <ul class="list-group">
+        <!--apply pipe-->
+        <li class="list-group-item">Title : {{course.title | uppercase}}</li>
+        <li class="list-group-item">Ratting : {{course.avis | number : '2.2-2'}}</li>
+        <li class="list-group-item">Students : {{course.participants}}</li>
+        <li class="list-group-item">Price : {{course.prix | currency :'EUR'}}</li>
+        <li class="list-group-item">Release Date : {{course.publicationDate | date : 'yyyy-MM-dd'}}</li>
+    </ul>
+</div>
+
+<ul class="nav nav-pills">
+    <li class="nav-item"><a class="nav-link" [class.active]="selectedCourse=='Laravel'"
+            (click)="selectedCourse='Laravel'">Laravel</a></li>
+    <li class="nav-item"><a class="nav-link" [class.active]="selectedCourse=='Angular'"
+            (click)="selectedCourse='Angular'">Angular</a></li>
+    <li class="nav-item"><a class="nav-link" [class.active]="selectedCourse=='Symfony'"
+            (click)="selectedCourse='Symfony'">Symfony</a></li>
+</ul>
+
+<div [ngSwitch]="selectedCourse">
+    <div *ngSwitchCase="'Laravel'">Lorem Laravel</div>
+    <div *ngSwitchCase="'Angular'">Lorem Angular</div>
+    <div *ngSwitchCase="'Symfony'">Lorem Symfony</div>
+    <div *ngSwitchDefault>Other</div>
+</div>
+<br><br><br><br>
